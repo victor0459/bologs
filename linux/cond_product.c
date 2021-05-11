@@ -32,7 +32,7 @@ void*thr_customer(void*arg){
 	while(1){
 		//取数据
 		pthread_mutex_lock(&mutex);
-		if(head==NULL){
+		while(head==NULL){
 			pthread_cond_wait(&cond,&mutex);
 		}
 		prod=head;
