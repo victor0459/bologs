@@ -49,6 +49,8 @@ int main(int argc,const char*argv[]){
 	serv_addr.sin_family=AF_INET;
 	serv_addr.sin_addr.s_addr=htonl(INADDR_ANY);
 	serv_addr.sin_port=htons(port);
+	int flag=1;
+	setsockopt(lfd,SOL_SOCKET,SO_REUSEADDR,&flag,sizeof(flag));
 	bind(lfd,(struct sockaddr*)&serv_addr,serv_len);
 	listen(lfd,36);
 
