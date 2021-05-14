@@ -9,7 +9,7 @@
 #include<signal.h>
 #include<sys/wait.h>
 #include<errno.h>
-#include<sys/select.h>
+#include<sys/epoll.h>
 
 int main(int argc,const char*argv[]){
 	if(argc<2){
@@ -33,52 +33,48 @@ int main(int argc,const char*argv[]){
 	printf("Start accept...\n");
 	struct sockaddr_in client_addr;
 	socklen_t cli_len=sizeof(client_addr);
-	//最大的文件描述符
-	int maxfd=lfd;
-	fd_set reads,temp;
-	FD_ZERO(&reads);
-	FD_SET(lfd,&reads);
+	
+	int epfd=epoll_create(2000);
+	struct epoll_event ev;
+	ev.events=EPOLLIN;
+	ev.data.fd=lfd;
+	epoll_ctl(epfd,EPOLL_CTL_ADD,lfd,&ev);
+	struct epoll_event all[2000];
 	while(1){
-		temp=reads;
-		int ret=select(maxfd+1,&temp,NULL,NULL,NULL);
-		if(ret==-1){
-			perror("select error");
-			exit(1);
-		}
-		//客户端发起了新连接
-		if(FD_ISSET(lfd,&temp)){
-			//接受连接请求 accept不阻塞
-			int cfd=accept(lfd,(struct sockaddr*)&client_addr,&cli_len);
-			if(cfd==-1){
-				perror("accept error");
-				exit(1);
-			}
-			//将cfd加入到待检测的读集合 下一次就能检测到
-			FD_SET(cfd,&reads);
-			//更新最大文件描述符
-			maxfd=maxfd<cfd?cfd:maxfd;
-		}
-		//已经连接上的客户端 发送数据
-		for(int i=lfd+1;i<maxfd+1;++i){
-			if(FD_ISSET(i,&temp)){
+		//使用epoll同志内核fd 文件IO检测
+		int ret=epoll_wait(epfd,all,sizeof(all)/sizeof(all[0]),-1);
+		for(int i=0;i<ret;i++){
+			int fd=all[i].data.fd;
+			if(fd==lfd){
+				int cfd=accept(lfd,(struct sockaddr*)&client_addr,&cli_len);
+				if(cfd==-1){
+					perror("accept error");
+					exit(1);
+				}
+				struct epoll_event temp;
+				temp.events=EPOLLIN;
+				epoll_ctl(epfd,EPOLL_CTL_ADD,cfd,&temp);
+			}else{
+				if(!all[i].events&EPOLLIN){
+					continue;
+				}
 				char buf[1024]={0};
-				int len=recv(i,buf,sizeof(buf),0);
+				int len=recv(fd,buf,sizeof(buf),0);
 				if(len==-1){
 					perror("recv error");
 					exit(1);
 				}else if(len==0){
-					printf("客户端已经断开连接\n");
-					close(i);
-					//从读集合中 删除
-					FD_CLR(i,&reads);
+					printf("client disconnect...\n");
+					close(fd);
+					epoll_ctl(epfd,EPOLL_CTL_DEL,fd,NULL);
 				}else{
 					printf("recv buf:%s\n",buf);
-					send(i,buf,strlen(buf),0);
+					write(fd,buf,len);
 				}
 			}
 		}
 	}
 
-
+	close(lfd);
 	return 0;
 }
