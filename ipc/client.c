@@ -12,6 +12,7 @@ int main(int argc,const char*argv[]){
 		perror("socket error");
 		exit(1);
 	}
+	unlink("client.sock");
 	//给客户端绑定套接字文件
 	struct sockaddr_un client;
 	client.sun_family=AF_LOCAL;
