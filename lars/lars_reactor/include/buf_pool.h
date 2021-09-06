@@ -33,6 +33,7 @@ class buf_pool
 		}
 		//开辟一个io_buf
 		io_buf*alloc_buf(int N);
+		//no pargma
 		io_buf*alloc_buf();
 
 		//重置一个io_buf
