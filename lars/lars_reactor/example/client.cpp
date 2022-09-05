@@ -39,7 +39,7 @@ int main(){
 	client->add_msg_router(2,callback_busi);
 	client->add_msg_router(200,print_busi);
 	client->add_msg_router(404,print_busi);
-
+	client->add_msg_router(888,callback_busi);
 	//注册hook连接函数
 	client->set_conn_start(on_client_build);
 	client->set_conn_close(on_client_lost);
