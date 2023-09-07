@@ -41,6 +41,6 @@ int main(int argc,const char*argv[]){
 	listen=evconnlistener_new_bind(base,listen_cb,base,LEV_OPT_CLOSE_FREE|LEV_OPT_REUSEABLE,-1,(struct sockaddr*)&serv,sizeof(serv));
 	event_base_dispatch(base);
 	evconnlistener_free(listen);
-	event_base_free(base);
+	//event_base_free(base);
 	return 0;
 }
