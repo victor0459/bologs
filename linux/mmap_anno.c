@@ -9,7 +9,7 @@
 #include<sys/wait.h>
 
 int main(){
-	//匿名映射这两个宏 unix没有	
+	//匿名映射这两个宏 unix没有	创建映射文件
 	int *mem=mmap(NULL,4,PROT_READ|PROT_WRITE,MAP_SHARED|MAP_ANON,-1,0);
 	if(mem==MAP_FAILED){
 		perror("mmap err");

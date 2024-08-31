@@ -8,7 +8,7 @@ class tcp_conn:public net_connection
 public:
 	tcp_conn(int connfd,event_loop *loop);
 
-	//被动处理读业务方法 被event_loop监听
+	//被动处理读业务方法 被event_loop监听 读
 	void do_read();
 
 	//被动处理写业务方法 被event_loop监听

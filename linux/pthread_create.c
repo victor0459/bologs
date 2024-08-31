@@ -13,6 +13,7 @@ int main(){
 	//printf("i am main  thread!pid=%d,tid=%lu\n",getpid(),pthread_self());
 	//sleep(1);
 	void *ret;
+	//线程分离
 	pthread_join(tid,&ret);
 	printf("ret exit with %d\n",(int)ret);
 	pthread_exit(NULL);

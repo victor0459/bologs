@@ -43,8 +43,8 @@ void test02() {
 	for_each(vTarget.begin(), vTarget.end(), [](int val) {cout << val << " "; });
 }
 int main() {
-	//test01();
-	test02();
+	test01();
+	//test02();
 	return 0;
 }
 

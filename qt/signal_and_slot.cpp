@@ -34,7 +34,7 @@ Widget::Widget(QWidget *parent)
         btn2->setText("bbb");
     }();
     //mutable关键字 用于值传递的变量 进行修改
-    QPushButton*btn3=new QPushButton("ccc",this);
+    QPushButton*btn3=new QPushButton("c",this);
     QPushButton*btn4=new QPushButton("bbb",this);
     btn3->move(100,100);
     btn4->move(200,200);

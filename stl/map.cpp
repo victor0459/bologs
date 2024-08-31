@@ -19,6 +19,7 @@ void test01() {
 	}
 	//删除
 	m.erase(1);
+	//迭代器
 	map<int, int>::iterator pos = m.find(1);
 	cout << "key:" << pos->first << "value:" << pos->second << endl;
 	cout << m.count(1) << endl;

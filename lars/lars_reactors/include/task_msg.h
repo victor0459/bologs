@@ -1,6 +1,6 @@
 #pragma once
 
-//thread_queue消息队列 所能接收的消息类型
+//thread_queue消息队列 所能接收的消息类型 新连接和新消息
 struct task_msg{
 	enum TASK_TYPE{
 		NEW_CONN,

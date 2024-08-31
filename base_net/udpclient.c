@@ -22,6 +22,7 @@ int main(int argc,const char*argv[]){
 	while(1){
 		char buf[1024]={0};
 		fgets(buf,sizeof(buf),stdin);
+		//发送消息
 		sendto(fd,buf,strlen(buf)+1,0,(struct sockaddr*)&serv,sizeof(serv));
 		//等待服务器发送数据过来
 		recvfrom(fd,buf,sizeof(buf),0,NULL,NULL);

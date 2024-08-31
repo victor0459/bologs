@@ -49,6 +49,7 @@ void create_reportdb_threads(void)
         }
 
         pthread_t tid;
+	//创建线程
         int ret = pthread_create(&tid, NULL, store_main, reportQueues[i]);
         if (ret == -1) {
             perror("pthread create ");

@@ -6,6 +6,7 @@
 #include<string.h>
 #include<arpa/inet.h>
 #include<net/if.h>
+//组播测试
 int main(int argc,const char*argv[]){
 	int fd=socket(AF_INET,SOCK_DGRAM,0);
 	if(fd==-1){

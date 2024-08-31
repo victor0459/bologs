@@ -11,9 +11,9 @@ pthread_once_t buf_pool::_once=PTHREAD_ONCE_INIT;
 pthread_mutex_t buf_pool::_mutex=PTHREAD_MUTEX_INITIALIZER;
 void buf_pool::make_io_buf_list(int cap,int num)
 {
-	//链表的头指针
+	//1链表的头指针
 	io_buf*prev;
-	//开辟内存池
+	//2开辟内存池
 	_pool[cap]=new io_buf(cap);
 	if(_pool[cap]==NULL){
 		fprintf(stderr,"new io_buf error\n");

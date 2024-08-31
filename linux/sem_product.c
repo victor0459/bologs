@@ -32,6 +32,7 @@ void *thr_customer(void*arg){
 }
 
 int main(){
+	//初始化
 	sem_init(&blank,0,_SEM_CNT_);
 	sem_init(&xfull,0,0);
 	pthread_t tid[2];

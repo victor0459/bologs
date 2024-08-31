@@ -22,7 +22,7 @@ class tcp_server{
 		static tcp_conn **conns;//全部已经在线的连接集合
 		static void increase_conn(int connfd,tcp_conn *conn);//新增一个链接
 		static void decrease_conn(int connfd);//减少一个链接
-		static void get_conn_num(int *curr_conn);
+		static void get_conn_num(int *curr_conn);//获取连接数量
 		static pthread_mutex_t _conns_mutex;
 
 #define MAX_CONNS 3//从配置文件中读取 TODO

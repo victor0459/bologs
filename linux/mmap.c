@@ -19,6 +19,7 @@ int main(){
 	
 	//释放
 	munmap(mem,8);
+	//关闭文件描述符
 	close(fd);
 	return 0;
 }

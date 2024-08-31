@@ -22,7 +22,7 @@ int main(int argc,const char*argv[]){
 	cJSON_AddItemToArray(array,cJSON_CreateString("hello,world"));
 	//数组中的对象
 	cJSON*subsub=cJSON_CreateObject();
-	cJSON_AddItemToObject(subsub,"梅赛德斯奔驰",cJSON_CreateString("心所向,持以恒"));
+	cJSON_AddItemToObject(subsub,"梅赛德斯奔驰",cJSON_CreateString("心所向,持以恒,愿三岔星辉照亮你的事业和前程"));
 	cJSON_AddItemToArray(array,subsub);
 	cJSON_AddItemToObject(subObj,"other",array);
 	cJSON_AddItemToObject(obj,"奔驰",subObj);

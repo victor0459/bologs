@@ -30,6 +30,7 @@ void Pop_LinkQueue(LinkQueue queue) {
 	if (NULL == queue) {
 		return;
 	}
+	//出队
 	struct LQueue* q = (struct LQueue*)queue;
 	if (q->size == 0) {
 		return;

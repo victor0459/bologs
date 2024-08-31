@@ -18,7 +18,7 @@ class Other{};
 void test() {
 	Base* base = NULL;
 	Child* child = NULL;
-	//child->base* 安全
+	//child->base* 安全 转换
 	Base* base2 = dynamic_cast<Base*>(child);
 
 

@@ -19,7 +19,7 @@ void test01() {
 	s1.insert(7);
 	printSet(s1);
 	//删除
-	//s1.erase(s1.begin());
+	s1.erase(s1.begin());
 	//s1.erase(3);
 	//printSet(s1);
 	set<int>::iterator pos = s1.find(3);

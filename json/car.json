@@ -2,7 +2,7 @@
 	"奔驰":	{
 		"factory":	"一汽大众",
 		"last":	31,
-		"price":	83,
+		"price":	82,
 		"sell":	49,
 		"sum":	80,
 		"other":	[123, true, "hello world", {

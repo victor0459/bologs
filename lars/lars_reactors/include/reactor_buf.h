@@ -36,7 +36,7 @@ class input_buf:public reactor_buf
 class output_buf:public reactor_buf
 {
 	public:
-	//将一段数据写到reactor_buf 中
+	//将一段数据写到reactor_buf 中.
 	int send_data(const char*data,int datalen);
 	
 	//将reactor_buf中的数据写到一个fd中

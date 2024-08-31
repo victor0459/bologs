@@ -49,7 +49,7 @@ void test02() {
 	Person p3("kuli", 27);
 	Person p4("dulante",29);
 	vector<Person> v;
-	v.push_back(p1);
+	v.push_back(p1.m_Name);
 	v.push_back(p2);
 	v.push_back(p3);
 	v.push_back(p4);

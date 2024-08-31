@@ -7,6 +7,7 @@
 int main(){
 	
 	printf("begin...\n");
+	//创建进程
 	pid_t pid=fork();
 	if(pid<0){
 		perror("fork err");

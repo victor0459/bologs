@@ -14,7 +14,7 @@ void thread_report(event_loop *loop,int fd,void *args){
 	StoreReport *store_conn=((Args*)args)->store_conn;
 
 	std::queue<lars::ReportStatusRequest> report_msgs;
-	queue->recv(report_msgs);
+	queue->recv(report_msgs);//接收队列消息
 	while(!report_msgs.empty()){
 		lars::ReportStatusRequest msg=report_msgs.front();
 		report_msgs.pop();

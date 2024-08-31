@@ -5,6 +5,7 @@
 pthread_mutex_t mutex;
 void*thr(void *arg){
 	while(1){
+		//上锁
 		pthread_mutex_lock(&mutex);
 		printf("hello world\n");
 		sleep(10);

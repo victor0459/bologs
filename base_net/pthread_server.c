@@ -45,6 +45,7 @@ int main(int argc,const char*argv[]){
 	socklen_t serv_len=sizeof(serv_addr);
 	int port=atoi(argv[1]);
 	int lfd=socket(AF_INET,SOCK_STREAM,0);
+	//清空缓存
 	memset(&serv_addr,0,serv_len);
 	serv_addr.sin_family=AF_INET;
 	serv_addr.sin_addr.s_addr=htonl(INADDR_ANY);

@@ -15,7 +15,7 @@ void listen_cb(struct evconnlistener*listener,
 		int len,void*ptr){
 	struct event_base*base=(struct event_base*)ptr;
 	//接受数据 发送数据
-	//将fd封装一下 为bufferevent
+	//将fd封装一下 为bufferevent 创建带缓冲区的事件 
 	struct bufferevent*bev=NULL;
 	bev=bufferevent_socket_new(base,fd,BEV_OPT_CLOSE_ON_FREE);
 	//给缓冲区对象的读写设置回调函数

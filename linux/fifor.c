@@ -23,6 +23,7 @@ int main(int argc,char*argv[]){
 			printf("read %s\n",buf);
 		}
 	}
+	//关闭文件
 	close(fd);
 	return 0;
 }

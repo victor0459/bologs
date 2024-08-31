@@ -63,7 +63,7 @@ int main()
 {
 	event_loop loop;
 
-	//加载配置文件
+	//加载配置文件 
 	config_file::setPath("./reactor.ini");
 	std::string ip = config_file::instance()->GetString("reactor","ip","0.0.0.0");
 	short port = config_file::instance()->GetNumber("reactor","port",8888);
@@ -78,7 +78,7 @@ int main()
 	server->set_conn_start(on_client_build);
 	server->set_conn_close(on_client_lost);
 
-
+	//启动事件循环 监听
 	loop.event_process();
 
 	return 0;

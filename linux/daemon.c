@@ -22,7 +22,7 @@ int main(int argc,char*argv[]){
 
 
 	//}
-	//退出
+	//退出 守护进程
 	char strFileName[256]={0};
 	while(1){
 		memset(strFileName,0x00,sizeof(strFileName));

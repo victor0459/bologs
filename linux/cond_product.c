@@ -20,6 +20,7 @@ void*thr_producter(void*arg){
 		pthread_mutex_lock(&mutex);
 		prod->next=head;
 		head=prod;
+		//释放锁
 		pthread_mutex_unlock(&mutex);
 		//发起通知 已生产好
 		pthread_cond_signal(&cond);

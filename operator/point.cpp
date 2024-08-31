@@ -42,7 +42,7 @@ void test() {
 	//delete p1;
 	smartPointer sp(new Person(10));
 	//sp->showAge();
-	//(*sp).showAge();
+	(*sp).showAge();
 }
 int main() {
 

@@ -4,6 +4,7 @@
 int main(){
 	pid_t pid=0;
 	for(int i=0;i<5;i++){
+		//创建进程
 		pid=fork();
 		if(pid==0){
 			printf("child pid=%d,ppid=%d\n",getpid(),getppid());

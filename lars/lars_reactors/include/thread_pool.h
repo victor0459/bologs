@@ -5,7 +5,7 @@
 
 class thread_pool{
 	public:
-		//初始化线程池的构造函数
+		//初始化线程池的构造函数.
 		thread_pool(int thread_cnt);
 		//提供一个获取一个thread_queue的方法
 		thread_queue<task_msg> * get_thread();

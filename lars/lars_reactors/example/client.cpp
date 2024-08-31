@@ -20,7 +20,7 @@ void print_busi(const char *data,uint32_t len,int msgid,net_connection *conn,voi
 void on_client_build(net_connection *conn,void *args)
 {
 	printf("-->on client build \n");
-	//连接创建成功之后主动发包
+	//连接创建成功之后主动发包 一般少
 	int msgid=1;
 	const char *msg="hello lars";
 	conn->send_message(msg,strlen(msg),msgid);

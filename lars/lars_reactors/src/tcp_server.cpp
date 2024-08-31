@@ -19,7 +19,7 @@ pthread_mutex_t tcp_server::_conns_mutex=PTHREAD_MUTEX_INITIALIZER;
 int tcp_server::_max_conns=0;
 int tcp_server::_curr_conns=0;
 
-//---------------------初始化 路由分发机制----------------------
+//---------------------初始化 路由分发机制---------------------
 msg_router tcp_server::router;
 
 //=====================初始化hook函数=======================

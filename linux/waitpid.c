@@ -11,7 +11,7 @@ int main(){
 		printf("i am child pid=%d\n",getpid());
 		sleep(2);
 	}
-	else if(pid>0){
+	else if(pid>0){//父进程
 		printf(" parent pid=%d\n",getpid());
 		int ret;
 		while((ret=waitpid(-1,NULL,WNOHANG))==0){

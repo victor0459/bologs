@@ -60,7 +60,7 @@ void udp_server::do_read(){
 				continue;
 			}
 			else if(errno==EAGAIN){
-				//非阻塞错误 当前套接字不可读
+				//非阻塞错误 当前套接字不可读 steven
 				break;
 			}
 			else{

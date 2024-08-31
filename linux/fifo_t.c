@@ -16,6 +16,7 @@ int main(int argc,char*argv[]){
 
 	char buf[256];
 	int num=1;
+	//循环读写
 	while(1){
 		memset(buf,0x00,sizeof(buf));
 		sprintf(buf,"xiaoming%04d",num++);

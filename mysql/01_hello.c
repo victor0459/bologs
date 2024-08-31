@@ -17,6 +17,7 @@ int main(){
 		exit(1);
 	}
 	//real_connnect
+	//连接数据库
 	mysql=mysql_real_connect(mysql,_HOST_,_USER_,_PASSWD_,_DBNAME_,0,NULL,0);
 	if(mysql==NULL){
 		printf("connect err\n");

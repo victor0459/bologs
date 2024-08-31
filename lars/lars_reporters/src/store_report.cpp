@@ -8,7 +8,7 @@ StoreReport::StoreReport(){
 	bool reconnect=true;
 	mysql_options(&_db_conn,MYSQL_OPT_RECONNECT,&reconnect);
 
-	//加载配置文件
+	//加载配置文件 数据库配置信息
 	string db_host=config_file::instance()->GetString("mysql","db_host","127.0.0.1");
 	short db_port=config_file::instance()->GetNumber("mysql","db_port",3306);
 	string db_user=config_file::instance()->GetString("mysql","db_user","root");

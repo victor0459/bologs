@@ -21,6 +21,7 @@ public:
 	int m_Age;
 };
 void test01() {
+	//创建队列
 	queue<int>q;
 	q.push(10);
 	q.push(20);

@@ -21,7 +21,7 @@ void qps_busi(const char *data, uint32_t len, int msgid, net_connection* conn, v
 
     qps_test::EchoMessage request, response;
 
-    //解析server返回的数据包
+    //解析server返回的数据包 注意格式
     if (response.ParseFromArray(data, len) == false) {
         printf("server call back data error\n");
         return;

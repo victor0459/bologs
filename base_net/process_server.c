@@ -45,6 +45,7 @@ int main(int argc,const char*argv[]){
 	act.sa_handler=recyle;
 	act.sa_flags=0;
 	sigemptyset(&act.sa_mask);
+	//子进程
 	sigaction(SIGCHLD,&act,NULL);
 
 

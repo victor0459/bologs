@@ -11,7 +11,7 @@ int main(int argc,char*argv[]){
 		printf("./a.out fifoname\n");
 		return -1;
 	}
-	//写
+	//写 打开文件
 	int fd=open(argv[1],O_WRONLY);
 
 	char buf[256];

@@ -6,6 +6,7 @@ int main(){
 	pipe(fd);
 	pid_t pid=fork();
 	if(pid==0){
+		//向管道写数据
 		write(fd[1],"hello",5);
 	
 	}else if(pid>0){

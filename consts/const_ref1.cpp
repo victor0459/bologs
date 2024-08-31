@@ -8,6 +8,7 @@ void test01() {
 	int* p =(int* )&ref;
 	*p = 1000;
 	*p=200;
+	*p=2000;
 	cout << "ref=" << ref << endl;
 }
 //常量引用场景 用来修饰形参

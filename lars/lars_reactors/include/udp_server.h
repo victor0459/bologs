@@ -15,7 +15,7 @@ class udp_server:public net_connection{
 	public:
 	udp_server(event_loop *loop,const char *ip,uint16_t port);
 
-	//udp主动发送消息
+	//udp主动发送消息 udp
 	virtual int send_message(const char *data,int msglen,int msgid);
 	virtual int get_fd(){
 		return this->_sockfd;

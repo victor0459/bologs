@@ -14,7 +14,7 @@ struct msg_head{
 
 //消息头+消息体 最大长度限制
 #define MESSAGE_LENGTH_LIMIT (65535-MESSAGE_HEAD_LEN)
-
+//回调格式 msg_callback
 typedef void msg_callback(const char *data,uint32_t len,int msgid,net_connection* conn,void *user_data);
 
 //定义一个路由消息分发机制

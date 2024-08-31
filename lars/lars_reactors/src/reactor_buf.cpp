@@ -41,7 +41,7 @@ int input_buf::read_data(int fd)
 {
 	int need_read;//硬件中有多少数据是可以读的
 	
-	//一次性将io的缓存数据全部读出来
+	//一次性将io的缓存数据全部读出来 读
 	//需要给fd设置一个属性
 	//传出一个参数，目前缓冲区中一共有多少数据是可读的
 	if(ioctl(fd,FIONREAD,&need_read)==-1){

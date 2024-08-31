@@ -1,6 +1,6 @@
 #pragma once
 
-//抽象的连接类
+//抽象的连接类d
 
 
 class net_connection

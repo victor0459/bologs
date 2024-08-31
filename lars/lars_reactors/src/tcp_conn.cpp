@@ -21,7 +21,7 @@ tcp_conn::tcp_conn(int connfd,event_loop *loop)
 {
 	_connfd=connfd;
 	_loop=loop;
-	//注意此处需要将connfd设置为非阻塞状态
+	//注意此处需要将connfd设置为非阻塞状态 x
 	int flag=fcntl(_connfd,F_SETFL,0);
 	fcntl(_connfd,F_SETFL,O_NONBLOCK | flag);
 

@@ -21,7 +21,7 @@ int main(int argc,const char*argv[]){
 	int port=atoi(argv[1]);
 	//创建套接字
 	int lfd=socket(AF_INET,SOCK_STREAM,0);
-	//初始化服务器 sockaddr_in
+	//初始化服务器 sockaddr_in 清空
 	memset(&serv_addr,0,serv_len);
 	serv_addr.sin_family=AF_INET;//地址族
 	serv_addr.sin_addr.s_addr=htonl(INADDR_ANY);//监听本机所有IP

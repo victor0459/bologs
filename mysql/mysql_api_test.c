@@ -23,7 +23,7 @@ int main(){
 		exit(1);
 	}
 	printf("hello mysql!\n");
-	//close
+	//close 关闭数据库
 	mysql_close(mysql);
 	return 0;
 

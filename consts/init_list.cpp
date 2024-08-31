@@ -52,7 +52,8 @@ public:
 void test() {
 	Person p;
 	//p.m_Phone.m_PhoneName = "三星";
-	p.m_Game.m_GameName = "吃鸡";
+	//p.m_Game.m_GameName = "吃鸡";
+	p.m_Game.m_GameName="LOL";
 }
 
 int main() {

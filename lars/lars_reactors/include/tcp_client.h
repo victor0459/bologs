@@ -15,7 +15,7 @@ class tcp_client:public net_connection
 	public:
 		tcp_client(event_loop *loop,const char *ip,unsigned short port);
 
-		//发送方法
+		//1发送方法
 		virtual int send_message(const char*data,int msglen,int msgid);
 
 		virtual int get_fd(){

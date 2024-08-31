@@ -20,7 +20,7 @@ class thread_queue{
 		}		
 	}
 	~thread_queue(){
-		pthread_mutex_destroy(&_queue_mutex);
+		pthread_mutex_destroy(&_queue_mutex);//销毁锁
 		close(_evfd);
 	}
 

@@ -9,6 +9,7 @@ void* thr(void*arg){
 int main(){
 	pthread_attr_t attr;
 	pthread_attr_init(&attr);
+	//线程分离
 	pthread_attr_setdetachstate(&attr,PTHREAD_CREATE_DETACHED);
 	pthread_t tid;
 	pthread_create(&tid,&attr,thr,NULL);

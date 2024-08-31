@@ -29,7 +29,7 @@ class udp_client:public net_connection
 
 		event_loop *_loop;
 
-		//消息路由分发机制
+		//消息路由分发机制.
 		msg_router _router;
 
 };

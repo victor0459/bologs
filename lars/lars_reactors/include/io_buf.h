@@ -2,7 +2,7 @@
 //定义一个buffer存储数据的结构
 class io_buf{
 	public:
-		//构造，创建一个io_buf类
+		//1构造，创建一个io_buf类
 		io_buf(int size);
 
 		//清空数据

@@ -22,6 +22,7 @@ public:
 };
 void test01() {
 	queue<int>q;
+	//向队列添加数据
 	q.push(10);
 	q.push(20);
 	q.push(30);

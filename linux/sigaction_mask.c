@@ -11,7 +11,7 @@ int main(){
 	struct sigaction act;
 	act.sa_flags=0;
 	sigemptyset(&act.sa_mask);
-	//临时平比的信号
+	//临时平比的信号 操作信号
 	sigaddset(&act.sa_mask,SIGQUIT);
 	act.sa_handler=catch_sig;
 	//注意捕捉

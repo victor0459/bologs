@@ -21,7 +21,7 @@ void event_loop:: event_process()
 */
 		int nfds=epoll_wait(_epfd,_fired_evs,MAXEVENTS,-1);
 		for(int i=0;i<nfds;i++){
-			//通过epoll触发的fd 从map中找打对应的io_event
+			//1通过epoll触发的fd 从map中找打对应的io_event
 			ev_it=_io_evs.find(_fired_evs[i].data.fd);
 
 			//取出对应的事件

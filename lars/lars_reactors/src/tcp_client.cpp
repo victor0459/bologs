@@ -40,7 +40,7 @@ tcp_client::tcp_client(event_loop *loop,const char *ip,unsigned short port)
 int tcp_client::send_message(const char *data,int msglen,int msgid)
 {
 
-	//printf("send_message call\n");
+	//printf("send_message call\n");发送
 	bool active_epollout=false;
 	if(obuf.length()==0){
 		active_epollout=true;

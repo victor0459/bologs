@@ -14,7 +14,7 @@ void event_loop:: event_process()
 {
 	io_event_map_it ev_it;
 	while(true){
-		//printf("wait IN OUT event...\n");
+		printf("wait IN OUT event...\n");
 /*		for(listen_fd_set::iterator it=listen_fds.begin();it!=listen_fds.end();it++){
 			printf("fd %dis listening by event_loop...\n",*it);
 		}

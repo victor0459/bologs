@@ -7,7 +7,7 @@ class StoreReport{
 
 		void store(lars::ReportStatusRequest &req);
 	private:
-		MYSQL _db_conn;
+		MYSQL _db_conn;//数据库连接
 
 
 };

@@ -29,7 +29,6 @@ int main(int argc,const char*argv[]){
 
 	//连接服务器
 	connect(fd,(struct sockaddr*)&serv,sizeof(serv));
-	//循环接收发送消息
 	while(1){
 		char buf[1024]={0};
 		fgets(buf,sizeof(buf),stdin);

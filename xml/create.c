@@ -8,7 +8,7 @@
 
 int main(int argc,char*argv[])
 {
-	//头文件
+	//头文件 创建
 	mxml_node_t*root=mxmlNewXML("1.0");
 	//根标签
 	mxml_node_t* china=mxmlNewElement(root,"china");

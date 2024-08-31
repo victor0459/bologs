@@ -31,11 +31,11 @@ int main(int argc,const char*argv[]){
 	serv.sin_port=htons(8765);
 	serv.sin_addr.s_addr=htonl(INADDR_ANY);
 	//创建监听的套接字
-		
+	socket();		
 	//绑定
-	
+	bind();
 	//监听
-	
+	listen();
 	//等待并接受连接请求
 	struct evconnlistener*listen=NULL;
 	listen=evconnlistener_new_bind(base,listen_cb,base,LEV_OPT_CLOSE_FREE|LEV_OPT_REUSEABLE,-1,(struct sockaddr*)&serv,sizeof(serv));

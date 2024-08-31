@@ -26,6 +26,7 @@ void Pop_SeqStack(SeqStack stack) {
 	if (NULL == stack) {
 		return;
 	}
+	//弹栈
 	struct SeqStack* s = (struct SeqStack*)stack;
 	s->data[s->size-1] = NULL;
 	s->size--;

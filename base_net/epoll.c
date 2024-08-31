@@ -23,6 +23,7 @@ int main(int argc,const char*argv[]){
 	int lfd=socket(AF_INET,SOCK_STREAM,0);
 	//初始化服务器 sockaddr_in
 	memset(&serv_addr,0,serv_len);
+	//地址族
 	serv_addr.sin_family=AF_INET;//地址族
 	serv_addr.sin_addr.s_addr=htonl(INADDR_ANY);//监听本机所有IP
 	serv_addr.sin_port=htons(port);//设置端口

@@ -21,6 +21,7 @@ int main(int argc,const char*argv[]){
 	serv_addr.sin_addr.s_addr=htonl(INADDR_ANY);
 	serv_addr.sin_port=htons(port);
 	int lfd=socket(AF_INET,SOCK_STREAM,0);
+	//端口绑定
 	bind(lfd,(struct sockaddr*)&serv_addr,serv_len);
 	listen(lfd,36);
 	struct sockaddr_in client_addr;

@@ -12,6 +12,7 @@ int main(){
 	}else if(pid>0){
 		printf("i am parent\n");
 		int status;
+		//父进程回收
 		pid_t wpid=wait(&status);
 		printf("wait ok,wpid=%d,pid=%d\n",wpid,pid);
 		if(WIFEXITED(status)){

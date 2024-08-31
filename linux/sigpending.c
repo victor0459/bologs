@@ -3,6 +3,7 @@
 #include<signal.h>
 
 int main(){
+	//信号集
 	sigset_t pend,sigproc;
 	sigemptyset(&sigproc);//先清空
 	sigaddset(&sigproc,SIGINT);//阻塞2号信号

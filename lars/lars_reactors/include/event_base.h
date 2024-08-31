@@ -1,7 +1,7 @@
 #pragma once
 #include<cstddef>
 class event_loop;
-typedef void io_callback(event_loop *loop,int fd,void *args);
+typedef void io_callback(event_loop *loop,int fd,void *args);//回调格式
 
 struct io_event{
 	io_event(){

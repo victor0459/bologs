@@ -15,6 +15,7 @@ void *thr_write(void*arg){
 }
 void *thr_read(void*arg){
 	while(1){
+		//读写锁
 		pthread_rwlock_rdlock(&rwlock);
         printf("-------%s-------self-------%lu------beginnum---%d\n",__FUNCTION__,pthread_self(),beginnum);
         usleep(2000);

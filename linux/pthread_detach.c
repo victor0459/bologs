@@ -14,6 +14,7 @@ int main(){
 	pthread_detach(tid);
 	sleep(5);
 	int ret=0;
+	//线程分离
 	if((ret=pthread_join(tid,NULL))>0){
 		printf("join err:%d,%s\n",ret,strerror(ret));
 	}

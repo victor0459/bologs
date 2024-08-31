@@ -27,6 +27,7 @@ int main(int argc,const char*argv[]){
 	socklen_t cli_len=sizeof(client);
 	char buf[1024]={0};
 	while(1){
+		//接收消息
 		int recvlen=recvfrom(fd,buf,sizeof(buf),0,(struct sockaddr*)&client,&cli_len);
 		printf("recv buf:%s\n",buf);
 		sendto(fd,buf,strlen(buf)+1,0,(struct sockaddr*)&client,sizeof(client));

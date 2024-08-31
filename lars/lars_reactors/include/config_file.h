@@ -9,7 +9,7 @@
 //key 是string 存放一个标题section
 //value 是一个map 存放该标题下面的所有key-value键值对
 typedef std::map<std::string, std::map<std::string, std::string> *> STR_MAP;
-
+//迭代器
 typedef STR_MAP::iterator STR_MAP_ITER;
 
 //设计成单例模式

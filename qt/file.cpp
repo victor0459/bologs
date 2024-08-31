@@ -31,7 +31,7 @@ Widget::Widget(QWidget *parent) :
             //关闭文件
             file.close();
 
-            //写文件
+            //写文件 注意关闭文件
 //            file.open(QFileDevice::Append);
 //            file.write("hello world");
 //            file.close();

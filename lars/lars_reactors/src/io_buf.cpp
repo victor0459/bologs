@@ -15,7 +15,7 @@ io_buf::io_buf(int size)
 }
 void io_buf::clear()
 {
-	length=head=0;
+	length=head=0;//清空一个io_buf
 }
 void io_buf::adjust()
 {

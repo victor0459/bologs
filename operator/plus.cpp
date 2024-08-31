@@ -55,7 +55,7 @@ void test() {
 	Person p3 = p1 + p2;
 	//cout << "p3的m_A：" << p3.m_A << endl;
 	//cout << "p3的m_B：" << p3.m_B << endl;
-	cout << p3<<endl;
+	cout << p3.m_A<<endl;
 }
 void test01() {
 	MyInteger myInt;

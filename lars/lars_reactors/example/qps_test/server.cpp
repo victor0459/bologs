@@ -9,7 +9,7 @@ void callback_busi(const char *data,uint32_t len,int msgid,net_connection *conn,
 	qps_test::EchoMessage request,response;
 	request.ParseFromArray(data,len);
 
-	//回显业务 在制作一个protobuf数据包 EchoMessage包
+	//回显业务 在制作一个protobuf数据包 EchoMessage包 使用protobuf
 	response.set_id(request.id());
 	response.set_content(request.content());	
 	

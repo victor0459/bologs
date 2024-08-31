@@ -20,7 +20,7 @@ int main(int argc,const char*argv[]){
 	
 	unlink("myfifo");
 
-	//创建有名管道
+	//创建有名管道 0664
 	mkfifo("myfifo",0664);
 
 	//打开文件

@@ -27,7 +27,7 @@ udp_client::udp_client(event_loop *loop, const char *ip, uint16_t port)
     inet_aton(ip, &server_addr.sin_addr);
     server_addr.sin_port = htons(port);
 
-    //2 链接服务器
+    //2.1 链接服务器
     int ret = connect(_sockfd, (const struct sockaddr*)&server_addr, sizeof(server_addr));
     if (ret == -1) {
         perror("connect ");

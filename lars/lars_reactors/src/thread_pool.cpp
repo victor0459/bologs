@@ -23,7 +23,7 @@ void deal_task(event_loop *loop,int fd,void *args){
 	queue->recv(new_task_queue);//此时就是存放的thread_queue的全部任务
 
 	while(new_task_queue.empty()!=true){
-		//从队列中得到一个任务
+		//从队列中得到一个任务 .
 		task_msg task=new_task_queue.front();
 		//将这个任务从队列中弹出
 		new_task_queue.pop();

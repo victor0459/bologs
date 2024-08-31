@@ -47,7 +47,7 @@ int main(int argc,const char*argv[]){
 		}
 		//客户端发起了新连接
 		if(FD_ISSET(lfd,&temp)){
-			//接受连接请求 accept不阻塞
+			//接受连接请求 accept不阻塞 非阻塞
 			int cfd=accept(lfd,(struct sockaddr*)&client_addr,&cli_len);
 			if(cfd==-1){
 				perror("accept error");

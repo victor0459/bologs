@@ -23,7 +23,7 @@ void Widget::paintEvent(QPaintEvent *){
     painter.drawLine(QPoint(0,0),QPoint(100,100));
 
     //画椭圆
-    painter.drawEllipse(QPoint(100,100),50,50);
+    painter.drawEllipse(QPoint(10,100),50,50);
     //高级设置  抗锯齿 效率低
     painter.setRenderHint(QPainter::Antialiasing);
     //画矩形

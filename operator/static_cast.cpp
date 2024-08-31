@@ -20,7 +20,7 @@ void test2() {
 	//child->base 向上 安全
 	Base* base2 = static_cast<Base*>(child);
 	//无关系转换 无效
-	//Other* other = static_cast<Other*>(base);
+	Other* other = static_cast<Other*>(base);
 }
 int main() {
 	test1();

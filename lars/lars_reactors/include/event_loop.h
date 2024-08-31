@@ -7,7 +7,7 @@
 #include<vector>
 #define MAXEVENTS 10
 typedef __gnu_cxx::hash_map<int,io_event> io_event_map;
-typedef __gnu_cxx::hash_map<int,io_event>::iterator io_event_map_it;
+typedef __gnu_cxx::hash_map<int,io_event>::iterator io_event_map_it;//迭代器
 typedef __gnu_cxx::hash_set<int> listen_fd_set;
 
 //定义一个task 一般任务的回调函数类型

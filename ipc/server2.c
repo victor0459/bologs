@@ -12,6 +12,7 @@ int main(int argc,const char*argv[]){
 		perror("socket error");
 		exit(1);
 	}
+	//删除管道文件
 	unlink("server.sock");//删除文件
 	struct sockaddr_un serv;
 	serv.sun_family=AF_LOCAL;
