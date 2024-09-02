@@ -36,8 +36,9 @@ int main()
 {
     event_loop loop;
 
-    tcp_client client(&loop, "127.0.0.1", 7779);
+    //tcp_client client(&loop, "127.0.0.1", 7779);
 
+    tcp_client client($loop,"127.0.0.1",8888);
 
     //添加链接连接成功业务
     client.set_conn_start(report_host_status);
