@@ -11,3 +11,28 @@ SubcribeList::SubcribeList()
 
 
 }
+
+
+void SubcibeList::subcribe(uint64_t mod,int fd)
+{
+	pthread_mutex_lock(&_book_list_lock);
+	_book_list[mod].insert(fd);
+	pthread_mutex_unlock(&_book_list_lock);
+
+
+}
+void SubcribeList::unsubcribe(uint64_t mod,int fd)
+{
+	pthread_mutex_lock(&_book_list_lock);
+	if(_book_list.find(mod)!=_book_list.end()){
+		_book_list[mod].erase(fd);
+		if(_book_list[mod].empty()==true){
+			_book_list.earse(mod);
+		}
+	}
+	pthread_mutex_unlock(&_book_list_lock);
+}
+
+
+
+
