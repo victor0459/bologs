@@ -32,7 +32,31 @@ void SubcribeList::unsubcribe(uint64_t mod,int fd)
 	}
 	pthread_mutex_unlock(&_book_list_lock);
 }
+void SubcribeList::make_publish_map(listen_fd_set&online_fds,publish_map&need_publish)
+{
+	publish_map::iterator it;
+	pthread_mutex_lock(&_push_list_lock);
 
+	for(it=_push_list.begin();it!=_push_list.end();it++){
+		if(online_fds.find(it->first)!=online_fds.end()){
+			hash_set<uint64_t>::iterator st;
+			for(st=_push_list[it->first].begin();st!=_push_list[it->first].end();it++){
+
+				need_pushlish[it->first].insert(*st);
+
+
+			}
+
+		}
+
+
+
+	}
+
+	pthread_mutex_unlock(&_push_list_lock);
+
+
+}
 
 
 
