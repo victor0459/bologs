@@ -117,3 +117,122 @@ void Route::load_changes(std::vector<uint64_t>& change_list)
     return ;
 }
 
+void Route::build_maps() 
+{
+    int ret = 0;
+    memset(_sql, 0, 1000);
+
+    //查询RouteData数据库 
+    //"Select * from RouteData;"
+    snprintf(_sql, 1000, "SELECT * FROM RouteData;");
+    ret = mysql_real_query(&_db_conn, _sql, strlen(_sql));
+    if (ret != 0) {
+        fprintf(stderr, "select RouteData error %s\n", mysql_error(&_db_conn));
+        exit(1);
+    }
+    
+    //获得一个结果集合
+    MYSQL_RES *result = mysql_store_result(&_db_conn);
+
+    //得到行数
+    long line_num = mysql_num_rows(result);
+    
+    //遍历分析集合中的元素， 加入_data_pointer中(MapA中)
+    MYSQL_ROW row;
+    for (int i = 0; i < line_num; i++) {
+        //处理一行的数据
+        row = mysql_fetch_row(result);
+        int modID = atoi(row[1]);
+        int cmdID = atoi(row[2]);
+        unsigned int ip = atoi(row[3]);
+        int port = atoi(row[4]);
+
+        printf("modid = %d, cmdid = %d, ip = %u, port = %d\n", modID, cmdID, ip, port);
+
+        //将读到数据加入map中
+        //组装一个map的key
+        uint64_t key = ((uint64_t)modID << 32) + cmdID;
+        uint64_t value = ((uint64_t)ip << 32) + port;
+
+        //插入到RouteDataMap_A中
+        (*_data_pointer)[key].insert(value);
+    }
+
+    mysql_free_result(result);
+}
+
+//将RouteData表中的数据加载到_temp_pointer
+void Route::load_route_data()
+{
+    int ret = 0;
+    memset(_sql, 0, 1000);
+
+    //清空temp_pointer所指向的临时表
+    _temp_pointer->clear();
+
+    //查询RouteData数据库 
+    //"Select * from RouteData;"
+    snprintf(_sql, 1000, "SELECT * FROM RouteData;");
+    ret = mysql_real_query(&_db_conn, _sql, strlen(_sql));
+    if (ret != 0) {
+        fprintf(stderr, "select RouteData error %s\n", mysql_error(&_db_conn));
+        exit(1);
+    }
+    
+    //获得一个结果集合
+    MYSQL_RES *result = mysql_store_result(&_db_conn);
+
+    //得到行数
+    long line_num = mysql_num_rows(result);
+    
+    //遍历分析集合中的元素， 加入_data_pointer中(MapA中)
+    MYSQL_ROW row;
+    for (int i = 0; i < line_num; i++) {
+        //处理一行的数据
+        row = mysql_fetch_row(result);
+        int modID = atoi(row[1]);
+        int cmdID = atoi(row[2]);
+        unsigned int ip = atoi(row[3]);
+        int port = atoi(row[4]);
+
+        //将读到数据加入map中
+        //组装一个map的key
+        uint64_t key = ((uint64_t)modID << 32) + cmdID;
+        uint64_t value = ((uint64_t)ip << 32) + port;
+
+        //插入到RouteDataMap_B中
+        (*_temp_pointer)[key].insert(value);
+    }
+
+    mysql_free_result(result);
+}
+
+//链接数据库的方法
+void Route::connect_db()
+{
+    //加载mysql的配置参数
+    string db_host = config_file::instance()->GetString("mysql", "db_host", "127.0.0.1");
+    short db_port = config_file::instance()->GetNumber("mysql", "db_port", 3306);
+    string db_user = config_file::instance()->GetString("mysql", "db_user", "root");
+    string db_passwd = config_file::instance()->GetString("mysql", "db_passwd", "aceld");
+    string db_name = config_file::instance()->GetString("mysql", "db_name", "lars_dns");
+
+    //初始化mysql链接
+    mysql_init(&_db_conn);
+
+    //设置一个超时定期重连
+    mysql_options(&_db_conn, MYSQL_OPT_CONNECT_TIMEOUT, "30");
+    //开启mysql断开链接自动重连机制
+    my_bool reconnect = 1;
+    mysql_options(&_db_conn, MYSQL_OPT_RECONNECT, &reconnect);
+
+    //链接数据库
+    if (!mysql_real_connect(&_db_conn, db_host.c_str(), db_user.c_str(), db_passwd.c_str(), db_name.c_str(), db_port, NULL, 0)) {
+        fprintf(stderr, "Failed to connect mysql\n");
+        exit(1);
+    }
+
+    printf("connect db succ!\n");
+}
+
+
