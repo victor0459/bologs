@@ -236,3 +236,26 @@ void Route::connect_db()
 }
 
 
+//通过modid/cmdid获取全部的当前模块所挂载的host集合
+host_set Route::get_hosts(int modid, int cmdid)
+{
+    host_set hosts;
+
+    //组装key
+    uint64_t key = ((uint64_t)modid << 32) + cmdid;
+
+
+    //通过map来得到
+    pthread_rwlock_rdlock(&_map_lock);
+    route_map_it it = _data_pointer->find(key);
+    if (it != _data_pointer->end()) {
+        //找到了对应的host set
+        hosts = it->second; 
+    }
+
+    pthread_rwlock_unlock(&_map_lock);
+
+    return hosts;
+}
+
+
