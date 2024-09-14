@@ -259,3 +259,60 @@ host_set Route::get_hosts(int modid, int cmdid)
 }
 
 
+//将_temp_pointer的数据更新到_data_pointer中
+void Route::swap()
+{
+    pthread_rwlock_wrlock(&_map_lock);
+    route_map *temp = _data_pointer;
+    _data_pointer = _temp_pointer;
+    _temp_pointer = temp;
+    pthread_rwlock_unlock(&_map_lock);
+}
+
+
+//周期性后端检查db的route信息的更改业务
+void *check_route_changes(void *args)
+{
+    int wait_time = 10; //10s自动加载RouteData一次
+    long last_load_time = time(NULL);
+    
+    while (true) {
+        sleep(1);
+        long current_time = time(NULL);//当前时间
+         
+        //业务1 判断版本是否已经被修改
+        int ret = Route::instance()->load_version();
+        if (ret == 1) {
+            //version已经被更改，有modid/cmdid被修改
+            
+            //1 将最新的RouteData的数据加载到_temp_pointer中
+            Route::instance()->load_route_data();
+            //2 将_temp_pointer的数据 更新到_data_pointer中
+            Route::instance()->swap();             
+            last_load_time = current_time;
+            
+            //3 获取当前已经被修改的modid/cmdid集合vector
+            std::vector<uint64_t> changes;
+            Route::instance()->load_changes(changes);
+            
+            //4 给订阅修改的mod客户端agent 推送消息
+            SubcribeList::instance()->publish(changes);
+            
+            //5 TODO 将RouteChanges表清空
+        }
+        else {
+            //version没有被修改
+            if (current_time - last_load_time >= wait_time) {
+                //定期检查超时 强制加载_temp_pointer-->_data_pointer中
+                Route::instance()->load_route_data();    
+                Route::instance()->swap();
+                last_load_time = current_time;
+            }
+        }
+        
+
+    }
+
+    return NULL;
+}
+
