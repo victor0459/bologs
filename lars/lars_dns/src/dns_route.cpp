@@ -316,3 +316,29 @@ void *check_route_changes(void *args)
     return NULL;
 }
 
+
+
+
+
+//test 发布的函数
+void *publish_change_mod_test(void *args)
+{
+    while (true) {
+        sleep(1);
+        //modid=1,cmdid=1 被修改了
+        int modid1 = 1;
+        int cmdid1 = 1;
+        uint64_t mod1 = (((uint64_t)modid1)<<32) + cmdid1;
+
+        //modid=1, cmdid=2 被修改了
+        int modid2 = 1;
+        int cmdid2 = 2;
+        uint64_t mod2 = (((uint64_t)modid2)<<32) + cmdid2;
+
+        std::vector<uint64_t> changes;
+        changes.push_back(mod1);
+        changes.push_back(mod2);
+
+        SubcribeList::instance()->publish(changes);
+    }
+}
