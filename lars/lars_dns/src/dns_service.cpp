@@ -61,4 +61,26 @@ void get_route(const char *data, uint32_t len, int msgid, net_connection *conn, 
     rsp.SerializeToString(&responseString);
     conn->send_message(responseString.c_str(), responseString.size(), lars::ID_GetRouteResponse);
 }
+//每个新客户端创建成功之后，执行该函数
+void create_subscribe(net_connection* conn, void *args)
+{
+    //给当前的conn 绑定一个 订阅的mod的一个set集合
+    conn->param = new client_sub_mod_list;
+}
 
+//每个链接销毁之前需要调用的
+void clear_subscribe(net_connection *conn, void *args)
+{
+    client_sub_mod_list::iterator it;
+    client_sub_mod_list *sub_list = (client_sub_mod_list*)conn->param;
+
+    for (it = sub_list->begin(); it != sub_list->end(); it++) {
+        //取消dns的订阅
+        uint64_t mod = *it;
+        SubcribeList::instance()->unsubcribe(mod, conn->get_fd());
+    }
+
+    delete sub_list;
+
+    conn->param = NULL;
+}
