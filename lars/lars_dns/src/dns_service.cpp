@@ -61,6 +61,7 @@ void get_route(const char *data, uint32_t len, int msgid, net_connection *conn, 
     rsp.SerializeToString(&responseString);
     conn->send_message(responseString.c_str(), responseString.size(), lars::ID_GetRouteResponse);
 }
+
 //每个新客户端创建成功之后，执行该函数
 void create_subscribe(net_connection* conn, void *args)
 {
@@ -83,4 +84,44 @@ void clear_subscribe(net_connection *conn, void *args)
     delete sub_list;
 
     conn->param = NULL;
+}
+
+int main()
+{
+    event_loop loop;
+
+    //--->加载配置文件
+    config_file::setPath("./conf/lars_dns.ini");
+    std::string ip = config_file::instance()->GetString("reactor", "ip", "0.0.0.0");
+    short port = config_file::instance()->GetNumber("reactor", "port", 8888);
+
+
+    server = new tcp_server(&loop, ip.c_str(), port);
+
+
+    //注册创建/销毁链接的Hook函数
+    server->set_conn_start(create_subscribe);
+    server->set_conn_close(clear_subscribe);
+
+
+    //注册一个回调业务
+    server->add_msg_router(lars::ID_GetRouteRequest, get_route);
+    
+
+    //开辟一个线程定期的发布已经更变的mod集合
+    pthread_t tid;
+    //int ret = pthread_create(&tid, NULL, publish_change_mod_test, NULL);
+    //启动backend thread实时监控版本信息
+    int ret = pthread_create(&tid, NULL, check_route_changes, NULL);
+    if (ret == -1) {
+        perror("pthread_create error\n");
+        exit(1);
+    }
+
+    pthread_detach(tid);
+
+
+    loop.event_process();
+
+    return 0;
 }
