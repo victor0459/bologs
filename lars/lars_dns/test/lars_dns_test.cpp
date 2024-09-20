@@ -18,6 +18,21 @@ void deal_get_route(const char *data, uint32_t len, int msgid, net_connection *c
     }
 }
 
+//主动给dns发送请求host主机集合消息
+void on_connection(net_connection *conn, void*args)
+{
+    lars::GetRouteRequest req;
+
+    req.set_modid(1);
+    req.set_cmdid(2);
+
+    std::string requestString ;
+
+    //proto-->string
+    req.SerializeToString(&requestString);
+    conn->send_message(requestString.c_str(), requestString.size(), lars::ID_GetRouteRequest);
+}
+
 
 int main(int argc, char **argv) {
     event_loop loop;
