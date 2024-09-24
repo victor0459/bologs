@@ -8,7 +8,7 @@ void deal_get_route(const char *data, uint32_t len, int msgid, net_connection *c
     rsp.ParseFromArray(data, len);
 
     //打印结果
-    printf("modid = %d\n", rsp.modid());
+    printf("modid = %d\n", rsp.modid());//mod cmd
     printf("cmdid = %d\n", rsp.cmdid());
     printf("host_size = %d\n", rsp.host_size());
 
