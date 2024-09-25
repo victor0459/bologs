@@ -13,7 +13,7 @@ void deal_get_route(const char *data, uint32_t len, int msgid, net_connection *c
     printf("host_size = %d\n", rsp.host_size());
 
     for (int i = 0; i < rsp.host_size(); i ++) {
-        printf("---> ip = %u\n", rsp.host(i).ip());
+        printf("---> ip = %u\n", rsp.host(i).ip());//ip+port 
         printf("---> port = %d\n", rsp.host(i).port());
     }
 }
