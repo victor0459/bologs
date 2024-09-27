@@ -42,5 +42,16 @@ int main(int argc, char **argv)
         printf("not exsit!\n");
     }
 
+    //2 获取全部的host信息
+    route_set route;
+    ret = api.get_route(modid, cmdid, route);
+    if (ret == 0) {
+        for (route_set_it it = route.begin(); it != route.end(); it++) {
+            std::cout << "ip = " << (*it).first << ", port = " << (*it).second << std::endl;
+        }
+    }
+
+
+
     return 0;
 }
