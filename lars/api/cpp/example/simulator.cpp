@@ -43,7 +43,45 @@ int main(int argc, char **argv)
     if (ret != 0) {
         std::cout <<"modid " << modid << "cmdid " << cmdid <<" not exist, register error ret = " << ret << std::endl;
     }
-   
+    //启动模拟器测试
+    for (int i = 0; i < query_cnt; i ++) {
+        ret = api.get_host(modid, cmdid, ip, port) ;
+        if (ret == 0) {
+            //获取成功
+            if (result.find(ip) == result.end()) {
+                //首次获取当前ip
+                std::pair<int,int> succ_err(0, 0);
+                result[ip] = succ_err;
+            }
+
+            //业务
+            std::cout <<"host " << ip << ":" <<"host called ";
+
+
+            if (rand()% 10 < err_rate) {
+                //上报错误消息
+                result[ip].second += 1;
+                api.report(modid, cmdid, ip, port, 1);
+                std::cout <<" ERROR!!!" << std::endl;
+            }
+            else {
+                //上报正确消息
+                result[ip].first += 1;
+                api.report(modid, cmdid, ip, port, 0);
+                std::cout <<" SUCC." << std::endl;
+            }
+        }
+        else if (ret == 3) {
+            std::cout <<modid <<","<<cmdid<<" not exist" <<std::endl;
+        }
+        else if (ret == 1) {
+            std::cout <<modid <<","<<cmdid<<" all hosts overload!!" <<std::endl;
+        }
+        else if (ret == 2) {
+            std::cout << " lars system error!!" <<std::endl;
+        }
+        usleep(5000);
+    }   
 
     return 0;
 }
