@@ -43,6 +43,7 @@ int main(int argc, char **argv)
     if (ret != 0) {
         std::cout <<"modid " << modid << "cmdid " << cmdid <<" not exist, register error ret = " << ret << std::endl;
     }
+
     //启动模拟器测试
     for (int i = 0; i < query_cnt; i ++) {
         ret = api.get_host(modid, cmdid, ip, port) ;
@@ -81,7 +82,18 @@ int main(int argc, char **argv)
             std::cout << " lars system error!!" <<std::endl;
         }
         usleep(5000);
-    }   
+    }
+
+
+    //遍历结果
+    std::map<std::string, std::pair<int, int>>::iterator it;
+    for (it = result.begin(); it != result.end(); it++) {
+        std::cout << "ip : " << it->first << ":";
+        std::cout << "succ : " << it->second.first << ", ";
+        std::cout << "error : " << it->second.second << std::endl;
+
+    }
+
 
     return 0;
 }
