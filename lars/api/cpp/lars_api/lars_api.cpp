@@ -53,3 +53,32 @@ lars_client::~lars_client()
     }
 }
 
+//注册一个模块
+int lars_client::reg_init(int modid, int cmdid)
+{
+    route_set route;
+
+    int retry_cnt = 0;
+
+    while (route.empty() && retry_cnt < 3) {
+
+        get_route(modid, cmdid, route);
+
+        if (route.empty() == true) {
+            usleep(50000); //等待50ms
+        }
+        else {
+            break;
+        }
+
+        ++retry_cnt;
+    }
+
+
+    if (route.empty() == true) {
+        return lars::RET_NOEXIST;//3
+    }
+
+    return lars::RET_SUCC; //0
+}
+
