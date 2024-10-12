@@ -52,7 +52,79 @@ lars_client::~lars_client()
         close(_sockfd[i]);
     }
 }
+//lars 系统获取host信息，得到可用的host ip和port
+int lars_client::get_host(int modid, int cmdid, std::string &ip, int &port)
+{
+    uint32_t seq = _seqid++;
 
+    //1 封装请求的protobuf消息
+    lars::GetHostRequest req; 
+    req.set_seq(seq);
+    req.set_modid(modid);
+    req.set_cmdid(cmdid);
+    
+    
+    //2 打包成lars能够识别的message
+    char write_buf[4096], read_buf[20*4096];
+    //消息头
+    msg_head head;
+    head.msglen = req.ByteSizeLong();
+    head.msgid = lars::ID_GetHostRequest;
+    memcpy(write_buf, &head, MESSAGE_HEAD_LEN);
+    req.SerializeToArray(write_buf + MESSAGE_HEAD_LEN, head.msglen);
+    
+    //3 发送
+    int index = (modid + cmdid) %3;
+    int ret = sendto(_sockfd[index], write_buf, head.msglen + MESSAGE_HEAD_LEN, 0, NULL, 0);
+    if (ret == -1) {
+        perror("send to");
+        return lars::RET_SYSTEM_ERROR;
+    }
+    
+    //4 阻塞等待接收数据
+    int message_len;
+    lars::GetHostResponse rsp;
+
+    do {
+        message_len = recvfrom(_sockfd[index], read_buf, sizeof(read_buf), 0, NULL, 0);
+        if (message_len == -1) {
+            perror("recvfrom ");
+            return lars::RET_SYSTEM_ERROR;
+        }
+
+        //消息头
+        memcpy(&head, read_buf, MESSAGE_HAED_LEN);
+        if (head.msgid != lars::ID_GetHostResponse) {
+            fprintf(stderr, "message IDerrror\n");
+            return lars::RET_SYSTEM_ERROR;
+        }
+        
+        //消息体
+        ret = rsp.ParseFromArray(read_buf + MESSAGE_HEAD_LEN, message_len-MESSAGE_HEAD_LEN);
+        if (!ret) {
+            fprintf(stderr, "message format error\n");
+            return lars::RET_SYSTEM_ERROR;
+        }
+
+    } while (rsp.seq() < seq); //直到服务器返回一个跟当前发送的seq相同的包为止
+
+
+    if (rsp.seq() != seq || rsp.modid() != modid || rsp.cmdid() != cmdid) {
+        fprintf(stderr, "message format error\n");
+        return lars::RET_SYSTEM_ERROR;
+    }
+    
+    //5 处理消息
+    if (rsp.retcode() == lars::RET_SUCC) {
+        lars::HostInfo host = rsp.host();
+        struct in_addr inaddr;
+        inaddr.s_addr = host.ip();
+        ip = inet_ntoa(inaddr);
+        port = host.port();
+    }
+    
+    return rsp.retcode();
+}
 //注册一个模块
 int lars_client::reg_init(int modid, int cmdid)
 {
