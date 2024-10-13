@@ -125,6 +125,44 @@ int lars_client::get_host(int modid, int cmdid, std::string &ip, int &port)
     
     return rsp.retcode();
 }
+
+//lar 系统 上报host调用信息 api
+void lars_client::report(int modid, int cmdid, std::string &ip, int port, int retcode)
+{
+    //1 封装信息
+    lars::ReportRequest req;
+
+    req.set_modid(modid);
+    req.set_cmdid(cmdid);
+    req.set_retcode(retcode);
+
+    lars::HostInfo *hp = req.mutable_host();
+
+    struct in_addr inaddr;
+    inet_aton(ip.c_str(), &inaddr);
+    int ip_num = inaddr.s_addr;
+    hp->set_ip(ip_num);
+    hp->set_port(port);
+    
+    //2 send
+    char write_buf[4096] ;
+
+    //消息头
+    msg_head head;
+    head.msglen = req.ByteSizeLong();
+    head.msgid = lars::ID_ReportRequest;
+    memcpy(write_buf, &head, MESSAGE_HAED_LEN);
+
+    //消息体
+    req.SerializeToArray(write_buf + MESSAGE_HAED_LEN, head.msglen);
+    
+    int index = (modid+cmdid)%3;
+    int ret = sendto(_sockfd[index], write_buf, MESSAGE_HAED_LEN+head.msglen, 0, NULL, 0);
+    if (ret == -1) {
+        perror("sendto");
+    }
+}
+
 //注册一个模块
 int lars_client::reg_init(int modid, int cmdid)
 {
