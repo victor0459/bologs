@@ -52,6 +52,7 @@ lars_client::~lars_client()
         close(_sockfd[i]);
     }
 }
+
 //lars 系统获取host信息，得到可用的host ip和port
 int lars_client::get_host(int modid, int cmdid, std::string &ip, int &port)
 {
@@ -272,4 +273,3 @@ int lars_client::reg_init(int modid, int cmdid)
 
     return lars::RET_SUCC; //0
 }
-
