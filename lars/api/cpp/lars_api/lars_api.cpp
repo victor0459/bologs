@@ -8,7 +8,7 @@
 #include "lars.pb.h"
 
 //using namespace std;
-
+#message head size
 #define MESSAGE_HAED_LEN 8
 
 
