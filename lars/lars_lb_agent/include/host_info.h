@@ -26,7 +26,7 @@ struct host_info {
 
     void set_overload();
 
-    void set_idle();
+    void set_idle();//设置idle
 
     uint32_t ip; //ip    
     int port; //端口
