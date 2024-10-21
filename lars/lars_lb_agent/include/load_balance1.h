@@ -30,6 +30,16 @@ public:
     bool empty() {
         return _host_map.empty();
     }
+    //获取host主机集合
+    void get_all_hosts(std::vector<host_info*> &vec);
+    //获取一个可用host信息
+    int choice_one_host(lars::GetHostResponse &rsp);
+    //向远程的DNS service中发送 ID_GetRouteRequest请求
+    int pull();
+    //根据Dns service远程返回的主机结果，更新自己的host_map表
+    void update(lars::GetRouteResponse &rsp);
+
+    //通过对当前主机的上报的结果， 调整内部节点idle 和overload关系
 
 private:
     int _modid;
