@@ -41,6 +41,18 @@ public:
 
     //通过对当前主机的上报的结果， 调整内部节点idle 和overload关系
 
+    //将最终的结果 再上报给 reporter service
+    void commit();
+
+    enum STATUS
+    {
+        PULLING, //正在从远程dns service网络通信中
+        NEW     //正在创建新的load_balance模块
+    };
+
+    STATUS status;//当前的状态
+
+
 private:
     int _modid;
     int _cmdid;
