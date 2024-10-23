@@ -30,6 +30,7 @@ public:
     bool empty() {
         return _host_map.empty();
     }
+
     //获取host主机集合
     void get_all_hosts(std::vector<host_info*> &vec);
     //获取一个可用host信息
@@ -40,7 +41,8 @@ public:
     void update(lars::GetRouteResponse &rsp);
 
     //通过对当前主机的上报的结果， 调整内部节点idle 和overload关系
-
+    void report(int ip, int port, int retcode);
+    
     //将最终的结果 再上报给 reporter service
     void commit();
 
@@ -51,7 +53,8 @@ public:
     };
 
     STATUS status;//当前的状态
-
+    //当前load_balance的最后更新时间
+    long last_update_time;
 
 private:
     int _modid;
