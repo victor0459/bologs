@@ -13,6 +13,8 @@ public:
 
     //agent 获取一个host主机 将返回的主机结果存放在rsp中
     int get_host(int modid, int cmdid, lars::GetHostResponse &rsp);
+//agent 获取host主机集合 将返回的主机结果存放在rsp中
+    int get_route(int modid, int cmdid, lars::GetRouteResponse &rsp);
 
 private:
     route_map _route_lb_map;  //当前route_lb模块所管理的loadbalance集合
