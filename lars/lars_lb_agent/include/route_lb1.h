@@ -16,6 +16,8 @@ public:
     //agent 获取host主机集合 将返回的主机结果存放在rsp中
     int get_route(int modid, int cmdid, lars::GetRouteResponse &rsp);
     int update_host(int modid, int cmdid, lars::GetRouteResponse &rsp);
+    //agent上报某个主机的结果
+    void report_host(lars::ReportRequest &req);
 
 private:
     route_map _route_lb_map;  //当前route_lb模块所管理的loadbalance集合
