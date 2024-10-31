@@ -29,7 +29,7 @@ public:
     //agent上报某个主机的结果
     void report_host(lars::ReportRequest &req);
 
-    //将全部的load_balance都重置为NEW状态
+    //将全部的load_balance都重置为NEW状态 重置
     void reset_lb_status();
 
 private:
