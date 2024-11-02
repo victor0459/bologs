@@ -14,4 +14,10 @@ void host_info::set_overload()
     overload_ts = time(NULL);
 }
 
-
+void host_info::set_idle()
+{
+    vsucc = lb_config.init_succ_cnt;
+    verr = 0;
+    rsucc = 0;
+    rerr = 0;
+}
