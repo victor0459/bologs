@@ -20,4 +20,8 @@ void host_info::set_idle()
     verr = 0;
     rsucc = 0;
     rerr = 0;
+    contin_succ = 0;
+    contin_err = 0;
+    overload = false;
+    idle_ts = time(NULL);
 }
