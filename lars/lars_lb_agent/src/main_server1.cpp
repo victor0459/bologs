@@ -9,6 +9,11 @@ route_lb *r_lb[3];
 
 struct load_balance_config lb_config;
 
+void init_lb_agent() 
+{
+
+}
+
 int main(int argc, char **argv)
 {
     init_lb_agent();
