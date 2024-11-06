@@ -11,7 +11,8 @@ struct load_balance_config lb_config;
 
 void init_lb_agent() 
 {
-
+    //设置配置文件路径(只能执行一次)
+    config_file::setPath("./conf/lb_agent.ini");
 }
 
 int main(int argc, char **argv)
