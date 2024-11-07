@@ -13,6 +13,11 @@ void init_lb_agent()
 {
     //设置配置文件路径(只能执行一次)
     config_file::setPath("./conf/lb_agent.ini");
+    lb_config.probe_num = config_file::instance()->GetNumber("loadbalance", "probe_num", 10);
+    lb_config.init_succ_cnt = config_file::instance()->GetNumber("loadbalance", "init_succ_cnt", 180);
+    lb_config.init_err_cnt = config_file::instance()->GetNumber("loadbalance", "init_err_cnt", 5);
+    lb_config.err_rate = config_file::instance()->GetFloat("loadbalance", "err_rate", 0.1);
+    lb_config.succ_rate = config_file::instance()->GetFloat("loadbalance", "succ_rate", 0.95);
 }
 
 int main(int argc, char **argv)
