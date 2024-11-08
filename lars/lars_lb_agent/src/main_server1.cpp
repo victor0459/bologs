@@ -18,6 +18,8 @@ void init_lb_agent()
     lb_config.init_err_cnt = config_file::instance()->GetNumber("loadbalance", "init_err_cnt", 5);
     lb_config.err_rate = config_file::instance()->GetFloat("loadbalance", "err_rate", 0.1);
     lb_config.succ_rate = config_file::instance()->GetFloat("loadbalance", "succ_rate", 0.95);
+    lb_config.contin_succ_limit = config_file::instance()->GetNumber("loadbalance", "contin_succ_limit", 10);
+    lb_config.contin_err_limit = config_file::instance()->GetNumber("loadbalance", "contin_err_limit", 10);
 }
 
 int main(int argc, char **argv)
