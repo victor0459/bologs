@@ -36,7 +36,7 @@ void init_lb_agent()
         }
     }
 
-    //TODO 加载本地ip
+    //TODO 加载本地ip load_local_host
     
 }
 
