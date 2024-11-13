@@ -14,7 +14,8 @@ extern route_lb * r_lb[3];
 
 struct load_balance_config
 {
-    
+    //经过若干次请求host节点后， 试探1次overload的过载节点
+    int probe_num;    
 };
 
 extern struct load_balance_config lb_config;
