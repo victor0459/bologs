@@ -16,6 +16,8 @@ struct load_balance_config
 {
     //经过若干次请求host节点后， 试探1次overload的过载节点
     int probe_num;    
+    //初始化一个host_info主机访问的成功次数，防止刚启动少量失败就认为过载
+    int init_succ_cnt;
 };
 
 extern struct load_balance_config lb_config;
