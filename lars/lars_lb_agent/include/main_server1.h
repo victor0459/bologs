@@ -18,6 +18,7 @@ struct load_balance_config
     int probe_num;    
     //初始化一个host_info主机访问的成功次数，防止刚启动少量失败就认为过载
     int init_succ_cnt;
+    int init_err_cnt;
 };
 
 extern struct load_balance_config lb_config;
