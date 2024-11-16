@@ -19,6 +19,8 @@ struct load_balance_config
     //初始化一个host_info主机访问的成功次数，防止刚启动少量失败就认为过载
     int init_succ_cnt;
     int init_err_cnt;
+    //当idle节点失败率高于此值，节点变为overload状态
+    float err_rate;
 };
 
 extern struct load_balance_config lb_config;
