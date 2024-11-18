@@ -23,6 +23,8 @@ struct load_balance_config
     float err_rate;
     //当overload节点成功率高于此值，节点变为idle状态
     float succ_rate;
+    //当idle节点连续失败次数超过此值，节点变为overload状态
+    int contin_err_limit;
 };
 
 extern struct load_balance_config lb_config;
