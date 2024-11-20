@@ -27,6 +27,8 @@ struct load_balance_config
     int contin_err_limit;
    //当overload节点成功次数超过此值，节点变为idle状态
     int contin_succ_limit;
+    //对于某个modid/cmdid下的idle状态的主机，需要清理一次负载窗口的时间
+    int idle_timeout;
 };
 
 extern struct load_balance_config lb_config;
