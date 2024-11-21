@@ -29,6 +29,8 @@ struct load_balance_config
     int contin_succ_limit;
     //对于某个modid/cmdid下的idle状态的主机，需要清理一次负载窗口的时间
     int idle_timeout;
+    //对于某个modid/cmdid下的overload状态主机， 在过载队列等待的最大时间
+    int overload_timeout;
 };
 
 extern struct load_balance_config lb_config;
