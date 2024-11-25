@@ -10,7 +10,9 @@ void report_cb(const char *data, uint32_t len, int msgid, net_connection *conn, 
 }
 void get_host_cb(const char *data, uint32_t len, int msgid, net_connection *conn, void *user_data)
 {
-    //request
     lars::GetHostRequest req;
     req.ParseFromArray(data, len);
+    int modid = req.modid();
+    int cmdid = req.cmdid();
+
 }
