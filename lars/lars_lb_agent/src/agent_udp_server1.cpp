@@ -14,5 +14,9 @@ void get_host_cb(const char *data, uint32_t len, int msgid, net_connection *conn
     req.ParseFromArray(data, len);
     int modid = req.modid();
     int cmdid = req.cmdid();
-
+    //设置回复的消息
+    lars::GetHostResponse rsp;
+    rsp.set_seq(req.seq());
+    rsp.set_modid(modid);
+    rsp.set_cmdid(cmdid);
 }
