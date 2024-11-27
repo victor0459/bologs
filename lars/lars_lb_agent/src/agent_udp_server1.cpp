@@ -19,4 +19,7 @@ void get_host_cb(const char *data, uint32_t len, int msgid, net_connection *conn
     rsp.set_seq(req.seq());
     rsp.set_modid(modid);
     rsp.set_cmdid(cmdid);
+    //通过 route_lb 获取一个可用host 添加到rsp中
+    route_lb *route_lb_p = (route_lb*)user_data;
+    route_lb_p->get_host(modid, cmdid, rsp);
 }
