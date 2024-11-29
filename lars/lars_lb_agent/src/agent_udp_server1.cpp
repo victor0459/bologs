@@ -27,3 +27,15 @@ void get_host_cb(const char *data, uint32_t len, int msgid, net_connection *conn
     rsp.SerializeToString(&responseString);
     conn->send_message(responseString.c_str(), responseString.size(), lars::ID_GetHostResponse);
 }
+//一个udp server
+void *agent_server_main(void* args)
+{
+    long index = (long)args;
+
+    short port = index + 8888;
+
+    event_loop loop;
+
+
+    return NULL;
+}
