@@ -35,7 +35,9 @@ void *agent_server_main(void* args)
     short port = index + 8888;
 
     event_loop loop;
+    udp_server server(&loop, "0.0.0.0", port) ;
 
+    //给udp server注册一些消息路由业务
 
     return NULL;
 }
