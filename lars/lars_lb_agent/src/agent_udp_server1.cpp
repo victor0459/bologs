@@ -40,5 +40,7 @@ void *agent_server_main(void* args)
     //给udp server注册一些消息路由业务
     //针对API的获取主机信息接口
     server.add_msg_router(lars::ID_GetHostRequest, get_host_cb, r_lb[port-8888]); //8888->r_lb[0], 8889->r_lb[1], 8890->r_lb[2]
+    //针对API的上报主机调用结果接口
+    server.add_msg_router(lars::ID_ReportRequest, report_cb, r_lb[port-8888]);
     return NULL;
 }
