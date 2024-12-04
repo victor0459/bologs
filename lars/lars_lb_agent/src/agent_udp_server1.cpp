@@ -44,5 +44,8 @@ void *agent_server_main(void* args)
     server.add_msg_router(lars::ID_ReportRequest, report_cb, r_lb[port-8888]);
     //针对API获取路由全部主机信息的接口
     server.add_msg_router(lars::ID_API_GetRouteRequest, get_route_cb, r_lb[port-8888]);
+    printf("agent UDP server :port %d is started...\n", port);
+
+    loop.event_process();
     return NULL;
 }
