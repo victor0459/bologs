@@ -49,3 +49,7 @@ void *agent_server_main(void* args)
     loop.event_process();
     return NULL;
 }
+void start_UDP_servers(void)
+{
+
+}
