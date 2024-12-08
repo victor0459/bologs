@@ -15,4 +15,10 @@ void deal_recv_route(const char *data, uint32_t len, int msgid, net_connection *
     //将 modid/cmdid交给一个route_lb来处理，将rsp中的hostinfo集合加入到对应route_lb中 
     r_lb[index]->update_host(modid, cmdid, rsp);
 }
+//如果队列中有数据，所触发的一个回调业务
+void new_dns_request(event_loop *loop, int fd, void *args)
+{
+    tcp_client *client = (tcp_client*)args;
 
+
+}
