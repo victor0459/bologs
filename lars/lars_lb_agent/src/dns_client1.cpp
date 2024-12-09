@@ -19,6 +19,7 @@ void deal_recv_route(const char *data, uint32_t len, int msgid, net_connection *
 void new_dns_request(event_loop *loop, int fd, void *args)
 {
     tcp_client *client = (tcp_client*)args;
-
+    //1 将请求数据从dns_queue中取出
+    std::queue<lars::GetRouteRequest>  msgs;
 
 }
