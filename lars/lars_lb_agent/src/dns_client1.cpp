@@ -21,5 +21,6 @@ void new_dns_request(event_loop *loop, int fd, void *args)
     tcp_client *client = (tcp_client*)args;
     //1 将请求数据从dns_queue中取出
     std::queue<lars::GetRouteRequest>  msgs;
-
+    //2 将取出的数据放在一个queue容器中
+    dns_queue->recv(msgs);
 }
