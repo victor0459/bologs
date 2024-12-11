@@ -23,4 +23,15 @@ void new_dns_request(event_loop *loop, int fd, void *args)
     std::queue<lars::GetRouteRequest>  msgs;
     //2 将取出的数据放在一个queue容器中
     dns_queue->recv(msgs);
+    //3 遍历queue容器的元素， 依次将每个元素消息 发送给dns service
+    while ( !msgs.empty() ) {
+        lars::GetRouteRequest req = msgs.front();
+        msgs.pop();
+
+        std::string requestString;
+        req.SerializeToString(&requestString);
+
+        //将这个消息透传给dns service
+        client->send_message(requestString.c_str(), requestString.size(), lars::ID_GetRouteRequest);
+    }
 }
