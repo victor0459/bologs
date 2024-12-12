@@ -35,3 +35,11 @@ void new_dns_request(event_loop *loop, int fd, void *args)
         client->send_message(requestString.c_str(), requestString.size(), lars::ID_GetRouteRequest);
     }
 }
+void conn_init(net_connection *conn, void *args)
+{
+    //dns client已经和 dns service 连接成功
+    //让所有udp server的 route_lb 下所有loadbalance都重置为NEW状态
+    for (int i = 0; i < 3; i ++) {
+        r_lb[i]->reset_lb_status();
+    }
+}
