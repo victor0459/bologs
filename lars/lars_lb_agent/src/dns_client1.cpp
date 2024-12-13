@@ -43,3 +43,11 @@ void conn_init(net_connection *conn, void *args)
         r_lb[i]->reset_lb_status();
     }
 }
+//dns client 线程的主业务
+void *dns_client_thread(void *args)
+{
+    printf("dns client thread start!\n");
+    event_loop loop;
+
+    return NULL;
+}
