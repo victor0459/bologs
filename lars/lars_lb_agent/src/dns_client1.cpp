@@ -48,6 +48,8 @@ void *dns_client_thread(void *args)
 {
     printf("dns client thread start!\n");
     event_loop loop;
+    std::string ip = config_file::instance()->GetString("dns", "ip", "127.0.0.1");
+    short port = config_file::instance()->GetNumber("dns", "port", 7778);
 
     return NULL;
 }
