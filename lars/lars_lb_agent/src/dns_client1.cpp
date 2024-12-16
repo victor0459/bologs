@@ -52,5 +52,8 @@ void *dns_client_thread(void *args)
     short port = config_file::instance()->GetNumber("dns", "port", 7778);
     //创建客户端
     tcp_client client(&loop, ip.c_str(), port);
+    //将dns_queue绑定到loop中，让loop监控queue的数据
+    dns_queue->set_loop(&loop);
+    dns_queue->set_callback(new_dns_request, &client);
     return NULL;
 }
