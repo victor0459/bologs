@@ -55,5 +55,7 @@ void *dns_client_thread(void *args)
     //将dns_queue绑定到loop中，让loop监控queue的数据
     dns_queue->set_loop(&loop);
     dns_queue->set_callback(new_dns_request, &client);
+    //注册一个回调函数 用来处理dns server的返回的消息
+    client.add_msg_router(lars::ID_GetRouteResponse, deal_recv_route);
     return NULL;
 }
