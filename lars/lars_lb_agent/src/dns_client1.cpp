@@ -57,5 +57,7 @@ void *dns_client_thread(void *args)
     dns_queue->set_callback(new_dns_request, &client);
     //注册一个回调函数 用来处理dns server的返回的消息
     client.add_msg_router(lars::ID_GetRouteResponse, deal_recv_route);
+    //设置一个当前dns client的创建连接成功的Hook函数
+    client.set_conn_start(conn_init);
     return NULL;
 }
