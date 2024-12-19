@@ -59,5 +59,6 @@ void *dns_client_thread(void *args)
     client.add_msg_router(lars::ID_GetRouteResponse, deal_recv_route);
     //设置一个当前dns client的创建连接成功的Hook函数
     client.set_conn_start(conn_init);
+    loop.event_process();
     return NULL;
 }
