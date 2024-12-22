@@ -66,6 +66,6 @@ void start_dns_client(void)
 {
     //开辟一个线程
     pthread_t tid;
-
+    int ret = pthread_create(&tid, NULL, dns_client_thread, NULL);
     pthread_detach(tid);
 }
