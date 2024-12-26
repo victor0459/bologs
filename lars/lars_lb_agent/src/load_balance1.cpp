@@ -84,4 +84,17 @@ void load_balance::update(lars::GetRouteResponse &rsp)
 
     printf("update hosts from Dns Service modid %d, cmdid %d\n", _modid, _cmdid);
 }
+//从idle_list或者overload_list中得到一个host节点信息
+void get_host_from_list(lars::GetHostResponse &rsp, host_list &l)
+{
+    //从list中选择第一个节点
+    host_info *host = l.front();
 
+    //将取出的host节点信息添加给rsp的hostInfo字段
+    lars::HostInfo *hip = rsp.mutable_host();
+    hip->set_ip(host->ip);
+    hip->set_port(host->port);
+
+    l.pop_front();
+    l.push_back(host);
+}
