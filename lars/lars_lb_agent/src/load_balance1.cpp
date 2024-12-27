@@ -98,3 +98,10 @@ void get_host_from_list(lars::GetHostResponse &rsp, host_list &l)
     l.pop_front();
     l.push_back(host);
 }
+void load_balance::get_all_hosts(std::vector<host_info*> &vec)
+{
+    for (host_map_it it = _host_map.begin(); it != _host_map.end(); it++) {
+        host_info *hi = it->second;
+        vec.push_back(hi);
+    }
+}
