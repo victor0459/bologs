@@ -105,3 +105,47 @@ void load_balance::get_all_hosts(std::vector<host_info*> &vec)
         vec.push_back(hi);
     }
 }
+//获取一个可用host信息
+int load_balance::choice_one_host(lars::GetHostResponse &rsp)
+{
+    //1 判断_dile_list是否为空， 如果空，表示目前没有空闲节点 
+    if (_idle_list.empty() == true) {
+        //1.1 判断是否超过阈值probe_num
+        //    如果超过，尝试从overload_list获取节点
+        //    如果没有超过, 返回给API层 此时全部主机都是overload状态
+        if (_access_cnt >= lb_config.probe_num) {
+            _access_cnt = 0;
+
+            //从 overload_list选择一个过载的节点
+            get_host_from_list(rsp, _overload_list);
+        }
+        else {
+            //明确的返回API层 已经过载了
+            ++_access_cnt;
+            return lars::RET_OVERLOAD;
+        }
+    }
+    else {
+        if (_overload_list.empty() == true) {
+            // _idle_list里面是有host主机
+            //选择一个idle节点返回即可
+            get_host_from_list(rsp, _idle_list);
+        }
+        else {
+            //overload_list不为空, 尝试从overload选择节点
+            if (_access_cnt >= lb_config.probe_num) {
+                _access_cnt = 0;
+                //从 overload_list选择一个过载的节点
+                get_host_from_list(rsp, _overload_list);
+            }
+            else {
+                ++_access_cnt;
+                //没有触发尝试overload获取的条件
+                //选择一个idle节点返回即可
+                get_host_from_list(rsp, _idle_list);
+            }
+        }
+    }
+    
+    return lars::RET_SUCC;
+}
