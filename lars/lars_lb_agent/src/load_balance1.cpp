@@ -149,3 +149,18 @@ int load_balance::choice_one_host(lars::GetHostResponse &rsp)
     
     return lars::RET_SUCC;
 }
+//将最终的结果 再上报给 reporter service
+void load_balance::commit()
+{
+    if (this->empty()) {
+        return;
+    }
+
+    //1 封装消息
+    lars::ReportStatusRequest req;
+    req.set_modid(_modid);
+    req.set_cmdid(_cmdid);
+    req.set_ts(time(NULL));
+    //默认当前的agent为caller
+    req.set_caller(127);
+}
