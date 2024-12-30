@@ -162,5 +162,20 @@ void load_balance::commit()
     req.set_cmdid(_cmdid);
     req.set_ts(time(NULL));
     //默认当前的agent为caller
-    req.set_caller(127);
+    req.set_caller(127);、
+    //2 从_idle_list中取值 全部上报
+    for (host_list_it it = _idle_list.begin(); it != _idle_list.end(); it++)  {
+        host_info *hi = *it;
+        lars::HostCallResult call_res;
+
+        call_res.set_ip(hi->ip);
+        call_res.set_port(hi->port);
+        call_res.set_succ(hi->rsucc);
+        call_res.set_err(hi->rerr);
+        call_res.set_overload(false);
+        printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
+
+
+        req.add_results()->CopyFrom(call_res);
+    }
 }
