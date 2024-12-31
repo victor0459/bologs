@@ -178,4 +178,19 @@ void load_balance::commit()
 
         req.add_results()->CopyFrom(call_res);
     }
+    //3 从_overload_list取值，全部上报
+    for (host_list_it it = _overload_list.begin(); it != _overload_list.end(); it++)  {
+        host_info *hi = *it;
+        lars::HostCallResult call_res;
+
+        call_res.set_ip(hi->ip);
+        call_res.set_port(hi->port);
+        call_res.set_succ(hi->rsucc);
+        call_res.set_err(hi->rerr);
+        call_res.set_overload(true);
+
+        printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
+
+        req.add_results()->CopyFrom(call_res);
+    }
 }
