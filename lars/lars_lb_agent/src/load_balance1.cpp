@@ -193,4 +193,7 @@ void load_balance::commit()
 
         req.add_results()->CopyFrom(call_res);
     }
+    //将上报请求数据发送 report_client线程
+    report_queue->send(req);
+}
 }
