@@ -149,6 +149,12 @@ int load_balance::choice_one_host(lars::GetHostResponse &rsp)
     
     return lars::RET_SUCC;
 }
+
+//通过对当前主机的上报的结果， 调整内部节点idle 和overload关系
+void load_balance::report(int ip, int port, int retcode)
+{
+    long current_time = time(NULL);
+}
 //将最终的结果 再上报给 reporter service
 void load_balance::commit()
 {
