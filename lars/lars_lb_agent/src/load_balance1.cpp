@@ -154,6 +154,12 @@ int load_balance::choice_one_host(lars::GetHostResponse &rsp)
 void load_balance::report(int ip, int port, int retcode)
 {
     long current_time = time(NULL);
+    uint64_t key = ((uint64_t)ip << 32) + port;
+
+    if (_host_map.find(key) == _host_map.end()) {
+        return;
+    }
+
 }
 //将最终的结果 再上报给 reporter service
 void load_balance::commit()
