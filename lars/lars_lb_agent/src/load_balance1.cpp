@@ -159,7 +159,8 @@ void load_balance::report(int ip, int port, int retcode)
     if (_host_map.find(key) == _host_map.end()) {
         return;
     }
-
+    //取出当前主机信息
+    host_info *hi = _host_map[key];
 }
 //将最终的结果 再上报给 reporter service
 void load_balance::commit()
