@@ -161,6 +161,24 @@ void load_balance::report(int ip, int port, int retcode)
     }
     //取出当前主机信息
     host_info *hi = _host_map[key];
+    //1 计数统计
+    if (retcode == lars::RET_SUCC) {
+        hi->vsucc ++;
+        hi->rsucc ++;
+
+        //连续成功次数
+        hi->contin_succ ++;
+        //连续失败次数归零
+        hi->contin_err = 0;
+
+    }
+    else {
+        hi->verr ++;
+        hi->rerr ++;
+
+        hi->contin_err++;
+        hi->contin_succ = 0;
+    }
 }
 //将最终的结果 再上报给 reporter service
 void load_balance::commit()
@@ -208,5 +226,5 @@ void load_balance::commit()
     }
     //将上报请求数据发送 report_client线程
     report_queue->send(req);
-}
+
 }
