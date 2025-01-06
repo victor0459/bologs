@@ -179,6 +179,10 @@ void load_balance::report(int ip, int port, int retcode)
         hi->contin_err++;
         hi->contin_succ = 0;
     }
+    //2 检查节点的状态( 检查idle节点是否满足overload条件, 检查overload是否满足idle条件)
+    if (hi->overload == false && retcode != lars::RET_SUCC) {
+
+    }
 }
 //将最终的结果 再上报给 reporter service
 void load_balance::commit()
