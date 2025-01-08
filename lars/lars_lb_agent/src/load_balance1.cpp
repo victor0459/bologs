@@ -190,6 +190,10 @@ void load_balance::report(int ip, int port, int retcode)
             //失败率超值
             overload = true; 
         }
+       //检查连续的失败次数
+        if (overload == false && hi->contin_err >= (uint32_t)lb_config.contin_err_limit) {
+            overload = true; 
+        }
     }
 }
 //将最终的结果 再上报给 reporter service
