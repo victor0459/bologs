@@ -194,6 +194,23 @@ void load_balance::report(int ip, int port, int retcode)
         if (overload == false && hi->contin_err >= (uint32_t)lb_config.contin_err_limit) {
             overload = true; 
         }
+        if (overload == true) {
+            //已经判定为overload状态
+            struct in_addr saddr;
+            saddr.s_addr = htonl(hi->ip);
+            
+            printf("[%d, %d] host %s:%d change overload , succ %u, err %u\n", 
+                    _modid, _cmdid,inet_ntoa(saddr), hi->port, hi->vsucc, hi->verr);
+            
+            //切换overload状态
+            hi->set_overload();
+
+            //移出idle_list
+            _idle_list.remove(hi);
+            //加入overload_list中
+            _overload_list.push_back(hi);
+            return ;
+        }
     }
 }
 //将最终的结果 再上报给 reporter service
