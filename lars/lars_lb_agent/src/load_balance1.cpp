@@ -212,6 +212,9 @@ void load_balance::report(int ip, int port, int retcode)
             return ;
         }
     }
+     else if (hi->overload == true && retcode == lars::RET_SUCC) {
+
+    }
 }
 //将最终的结果 再上报给 reporter service
 void load_balance::commit()
