@@ -213,6 +213,11 @@ void load_balance::report(int ip, int port, int retcode)
         }
     }
      else if (hi->overload == true && retcode == lars::RET_SUCC) {
+        bool idle = false;
+        
+        //overload节点
+        //1 计算成功率
+        double succ_rate = hi->vsucc *1.0 / (hi->vsucc + hi->verr);
 
     }
 }
