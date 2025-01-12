@@ -218,6 +218,9 @@ void load_balance::report(int ip, int port, int retcode)
         //overload节点
         //1 计算成功率
         double succ_rate = hi->vsucc *1.0 / (hi->vsucc + hi->verr);
+        if (succ_rate > lb_config.succ_rate) {
+            idle = true;
+        }
 
     }
 }
