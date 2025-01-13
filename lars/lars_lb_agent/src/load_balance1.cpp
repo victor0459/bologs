@@ -221,7 +221,10 @@ void load_balance::report(int ip, int port, int retcode)
         if (succ_rate > lb_config.succ_rate) {
             idle = true;
         }
-
+        //2 连续成功次数
+        if (idle == false && hi->contin_succ >= (uint32_t)lb_config.contin_succ_limit) {
+            idle = true;
+        }
     }
 }
 //将最终的结果 再上报给 reporter service
