@@ -225,6 +225,24 @@ void load_balance::report(int ip, int port, int retcode)
         if (idle == false && hi->contin_succ >= (uint32_t)lb_config.contin_succ_limit) {
             idle = true;
         }
+        if (idle == true) {
+            struct in_addr saddr;
+            saddr.s_addr = htonl(hi->ip);
+            
+            printf("[%d, %d] host %s:%d change idle , succ %u, err %u\n", _modid, _cmdid,
+                    inet_ntoa(saddr), hi->port,
+                    hi->vsucc, hi->verr);
+            
+            //切换idle状态
+            hi->set_idle();
+
+            //移除overload_list中
+            _overload_list.remove(hi);
+            //加入idle_list
+            _idle_list.push_back(hi);
+            return ;
+        }
+    }
     }
 }
 //将最终的结果 再上报给 reporter service
