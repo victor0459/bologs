@@ -243,6 +243,25 @@ void load_balance::report(int ip, int port, int retcode)
             return ;
         }
     }
+   // idle的节点成功了， overload的失败了 ---> 周期的检查
+    if (hi->overload == false) {
+        //节点是一个idle节点
+        if (current_time - hi->idle_ts >= lb_config.idle_timeout)     {
+            //当前的空闲节点 时间窗口到达
+            //重置窗口，清空之前的累计成功次数
+            struct in_addr saddr;
+            saddr.s_addr = htonl(hi->ip);
+            
+            printf("[%d, %d] host %s:%d idle timeout! reset data to idle , vsucc %u, verr %u\n", _modid, _cmdid,
+                    inet_ntoa(saddr), hi->port,
+                    hi->vsucc, hi->verr);
+            hi->set_idle();
+        }
+    }
+
+
+
+
     }
 }
 //将最终的结果 再上报给 reporter service
