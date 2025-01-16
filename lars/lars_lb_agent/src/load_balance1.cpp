@@ -258,7 +258,15 @@ void load_balance::report(int ip, int port, int retcode)
             hi->set_idle();
         }
     }
-
+   else {
+        //节点是一个overload节点
+        if (current_time - hi->overload_ts >= lb_config.overload_timeout) {
+            //强制给overload节点拿到idle下，做尝试
+            struct in_addr saddr;
+            saddr.s_addr = htonl(hi->ip);
+            
+        
+        }
 
 
 
