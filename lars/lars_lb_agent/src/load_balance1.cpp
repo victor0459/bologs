@@ -264,7 +264,9 @@ void load_balance::report(int ip, int port, int retcode)
             //强制给overload节点拿到idle下，做尝试
             struct in_addr saddr;
             saddr.s_addr = htonl(hi->ip);
-            
+            printf("[%d, %d] host %s:%d overload timeout! reset idle , vsucc %u, verr %u\n", _modid, _cmdid,
+                    inet_ntoa(saddr), hi->port,
+                    hi->vsucc, hi->verr);           
         
         }
 
