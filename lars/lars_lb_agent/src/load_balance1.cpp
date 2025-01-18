@@ -267,7 +267,7 @@ void load_balance::report(int ip, int port, int retcode)
             printf("[%d, %d] host %s:%d overload timeout! reset idle , vsucc %u, verr %u\n", _modid, _cmdid,
                     inet_ntoa(saddr), hi->port,
                     hi->vsucc, hi->verr);           
-        
+            	    hi->set_idle();        
         }
 
 
