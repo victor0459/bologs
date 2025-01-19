@@ -268,10 +268,8 @@ void load_balance::report(int ip, int port, int retcode)
                     inet_ntoa(saddr), hi->port,
                     hi->vsucc, hi->verr);           
             	    hi->set_idle();        
+	    _overload_list.remove(hi);
         }
-
-
-
     }
 }
 //将最终的结果 再上报给 reporter service
