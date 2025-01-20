@@ -269,6 +269,7 @@ void load_balance::report(int ip, int port, int retcode)
                     hi->vsucc, hi->verr);           
             	    hi->set_idle();        
 	    _overload_list.remove(hi);
+	    _idle_list.push_back(hi);
         }
     }
 }
