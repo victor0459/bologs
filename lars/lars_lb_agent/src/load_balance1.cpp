@@ -310,6 +310,7 @@ void load_balance::commit()
         printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
         printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
         printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
+        printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
         req.add_results()->CopyFrom(call_res);
     }
     //3 从_overload_list取值，全部上报
