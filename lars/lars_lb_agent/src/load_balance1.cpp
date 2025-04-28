@@ -327,6 +327,7 @@ printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
  printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
  printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
 printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
+printf("port: %d, succ = %d, err = %d\n", hi->port, hi->rsucc, hi->rerr);
         req.add_results()->CopyFrom(call_res);
     }
     //将上报请求数据发送 report_client线程
